@@ -52,10 +52,9 @@ function parseLogBlock(block) {
   };
 }
 
-// Hash ONLY generatedTime + messageForHash (no user/source in the canonical)
 function computeHashes(generatedTime, messageForHash) {
   const input = `${generatedTime}|${messageForHash}`;
-  console.log("🧩 Canonical string:", JSON.stringify(input)); // reveal hidden chars
+  console.log("Canonical string:", JSON.stringify(input));
   const sha256 = crypto.createHash("sha256").update(input, "utf8").digest("hex");
   const md5    = crypto.createHash("md5").update(input, "utf8").digest("hex");
   return { sha256, md5, canonical: input };
@@ -88,21 +87,19 @@ async function processLogType(logType, logChain, lastTimestamps) {
           const user   = `${log.logName}:${log.provider}`;
           const action = `[EventID:${log.eventId}] [RecordID:${log.recordId}] ${log.message}`;
 
-          // Log pieces so you can see exactly what's hashed
           console.log("pieces:", {
             generated,
             user,
             action
           });
 
-          // ⬇️ Hash uses ONLY generatedTime + action
           const { sha256, md5, canonical } = computeHashes(generated, action);
 
           const tx = await logChain.addLog(
             generated,
             captured,
-            user,     // still stored for UI grouping
-            action,   // displayed message
+            user,
+            action,
             sha256,
             md5
           );

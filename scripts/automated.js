@@ -1,4 +1,3 @@
-// automated.js
 const { exec } = require("child_process");
 const fs = require("fs");
 const crypto = require("crypto");
@@ -19,7 +18,6 @@ function saveLastTimestamps(timestamps) {
   fs.writeFileSync(LAST_LOG_FILE, JSON.stringify(timestamps ?? {}, null, 2), "utf8");
 }
 
-// Parse blocks from: Get-WinEvent | Format-List TimeCreated, LogName, ProviderName, Id, RecordId, Message
 function parseLogBlock(block) {
   const timeMatch     = block.match(/TimeCreated\s*:\s*(.+)/);
   const logNameMatch  = block.match(/LogName\s*:\s*(.+)/);
@@ -31,14 +29,13 @@ function parseLogBlock(block) {
   const timeStr   = timeMatch ? timeMatch[1].trim() : null;
   const timestamp = timeStr ? new Date(timeStr).getTime() : null;
 
-  // Normalize message to a single line for stable hashing/display
   const rawMessage = msgMatch ? msgMatch[1] : "";
   const cleanMessage = rawMessage
-    .replace(/\r\n/g, "\n")      // CRLF -> LF
-    .replace(/\t/g, " ")         // tabs -> spaces
-    .replace(/[ \t]+\n/g, "\n")  // strip trailing spaces at EOL
-    .replace(/\n[ \t]+/g, "\n")  // strip indentation after newlines
-    .replace(/\s+/g, " ")        // collapse all whitespace runs
+    .replace(/\r\n/g, "\n")
+    .replace(/\t/g, " ")
+    .replace(/[ \t]+\n/g, "\n")
+    .replace(/\n[ \t]+/g, "\n")
+    .replace(/\s+/g, " ")
     .trim();
 
   return {

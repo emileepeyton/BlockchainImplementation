@@ -31,7 +31,6 @@ async function fetchLogsFromBlockchain() {
   const logs = [];
 
   for (let i = 0; i < logCount; i++) {
-    // getLog returns: generated, captured, user, action, sha256Hash, md5Hash
     const [generated, captured, user, action, sha256Hash, md5Hash] = await logChain.getLog(i);
     logs.push({
       id: i,
@@ -49,7 +48,6 @@ async function fetchLogsFromBlockchain() {
 }
 
 function extractRecordId(actionString) {
-  // actionString expected to contain [RecordID:<number>] (as automated.js stores it)
   const match = String(actionString).match(/\[RecordID:(\d+)\]/);
   return match ? match[1] : null;
 }
@@ -64,9 +62,7 @@ function groupLogs(logs) {
   logs.forEach(log => {
     const [type, source] = log.user.split(":", 2);
     if (grouped[type]) {
-      // Make user display the source only
       const sourceOnly = source || log.user;
-      // Extract RecordID and EventID for independent display
       const recordId = extractRecordId(log.action);
       const eventId = extractEventId(log.action);
       grouped[type].push({ ...log, user: sourceOnly, recordId, eventId });

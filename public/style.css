@@ -1,0 +1,103 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f1f3f5;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 36px;
+  color: #212529;
+}
+
+.search-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 20px auto 30px;
+  flex-wrap: wrap;
+}
+
+#searchInput {
+  padding: 12px;
+  font-size: 16px;
+  width: 400px;
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+#clearButton {
+  padding: 12px 20px;
+  font-size: 16px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#clearButton:hover {
+  background-color: #c82333;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.tab-button {
+  padding: 10px 25px;
+  background-color: #e9ecef;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.tab-button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.log-container {
+  display: none;
+}
+
+.log-container.active {
+  display: block;
+}
+
+.log {
+  background-color: white;
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+}
+
+.log h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.log p {
+  font-size: 15px;
+  margin: 6px 0;
+}
